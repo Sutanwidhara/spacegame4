@@ -6,21 +6,15 @@ var gameState = "play";
 var coinImage , coin , coinGroup ;
 var score = 0 ;
 var meteor , meteorImage , meteorGroup ;
-var backgroundImage2 , backgroundsp2 ;
-var backgroundImage3 , backgroundsp3 ;
-var opponentspaceshipImage , opponentspaceship;
-var bulletImage , bullet;
+var backgroundImage2 ;
 
 function preload() {
-backgroundImage = loadImage("./Assets/Spacebackground.jpg");
+backgroundImage = loadImage("./Assets/level1bg.jpg");
 spaceshipImage = loadImage("./Assets/spaceship.png");
 cometImage = loadImage("./Assets/comet.png");
 coinImage = loadImage("./Assets/coin.png");
 meteorImage = loadImage("./Assets/meteor.png");
 backgroundImage2 = loadImage("./Assets/level2bg.jpg");
-backgroundImage3 = loadImage("./Assets/level3bg.jpg");
-opponentspaceshipImage = loadImage("./Assets/Opponent spaceship.png");
-bulletImage = loadImage("./Assets/bullet.png");
 }
 
 function setup() {
@@ -75,14 +69,11 @@ function draw() {
 
     if(score==10){
     gameState = "level2";
-    text ("You crossed level 1 !" ,(width/2)-100, height/2 );
-    score = 0;
   }
     
     spawnComet();
     spawnCoin();
-  
-  }
+   }
 
   if(gameState === "end"){
     background(15,17,74);
@@ -97,8 +88,7 @@ function draw() {
   }
 
   if(gameState === "level2"){
-    
-    backgroundsp.addImage("spacebg",backgroundImage2);
+    backgroundsp.addImage("space",backgroundImage2);
     if(spaceship.isTouching(meteorGroup)){
     gameState = "end"
   }
@@ -110,7 +100,10 @@ function draw() {
   fill("white");
   textSize(20);
   text("score :" + score, 50 , 50 );
+  if(score == 10){
+    text ("You crossed level 1 !" ,(width/2)-100, height/2 );
   }
+}
  
 function spawnComet(){
   if(frameCount % 100 == 0 ){
@@ -120,7 +113,6 @@ function spawnComet(){
     comet.scale = 0.1;
     cometGroup.add(comet);
   }
-  
 }
 
 function spawnCoin(){
